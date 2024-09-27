@@ -1,6 +1,8 @@
 # IntegrationKata
 
 -----------------------
+Atelier :
+
 L'idée va être de reproduire cette collection de cards.
 Chaque card possède une image, un titre, une description ainsi qu'un bouton d'action.
 Ta réalisation devra respecter les critères d'adaptabilité (voir les photos), d'accessibilité et de référencement.
@@ -11,6 +13,17 @@ https://wild4ever.slack.com/files/U03743LTYH5/F06M0UM0UNS/enregistrement_de_l___
 https://wild4ever.slack.com/files/U03743LTYH5/F06ML7WF1MF/capture_d___e__cran_2024-02-29_a___08.45.33.png
 https://wild4ever.slack.com/files/U03743LTYH5/F06M0UNJCDC/capture_d___e__cran_2024-02-29_a___08.45.44.png
 https://wild4ever.slack.com/files/U03743LTYH5/F06M7J1J37C/capture_d___e__cran_2024-02-29_a___08.46.04.png
+
+Cours binding - Exos :
+
+Reproduis l’élément présenté
+C’est un composant “card” qui affiche :
+une image
+un titre
+un âge
+une citation qui se remplit lorsque l’utilisateur écrit dans le champ <input>
+Ajoute un event binding (un bouton qui, au click, déclenche une méthode)
+BONUS 🤓: obtenir le même résultat, mais en créant une interface User et l’utiliser comme type
 
 ------------------------
 

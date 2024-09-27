@@ -1,0 +1,86 @@
+h1 {
+  color: green;
+}
+
+.ring-1 {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 2px solid rgb(114.4776119403, 91.5820895522, 3.5223880597);
+  box-shadow: 0 6.6666666667px 6.6666666667px rgb(114.4776119403, 91.5820895522, 3.5223880597);
+  margin: -3px;
+}
+
+.ring-2 {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 4px solid rgb(163.9552238806, 131.1641791045, 5.0447761194);
+  box-shadow: 0 13.3333333333px 13.3333333333px rgb(163.9552238806, 131.1641791045, 5.0447761194);
+  margin: -6px;
+}
+
+.ring-3 {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 6px solid rgb(213.4328358209, 170.7462686567, 6.5671641791);
+  box-shadow: 0 20px 20px rgb(213.4328358209, 170.7462686567, 6.5671641791);
+  margin: -9px;
+}
+
+.ring-4 {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 8px solid rgb(247.8656716418, 201.4925373134, 23.1343283582);
+  box-shadow: 0 26.6666666667px 26.6666666667px rgb(247.8656716418, 201.4925373134, 23.1343283582);
+  margin: -12px;
+}
+
+.ring-5 {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 10px solid rgb(249.3880597015, 212.9104477612, 72.6119402985);
+  box-shadow: 0 33.3333333333px 33.3333333333px rgb(249.3880597015, 212.9104477612, 72.6119402985);
+  margin: -15px;
+}
+
+.ring-6 {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 12px solid rgb(250.9104477612, 224.328358209, 122.0895522388);
+  box-shadow: 0 40px 40px rgb(250.9104477612, 224.328358209, 122.0895522388);
+  margin: -18px;
+}
+
+.ring-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px;
+  width: 100%;
+}
+
+.grid-item {
+  background-color: #3498db;
+  padding: 15px;
+  color: white;
+  text-align: center;
+  font-size: large;
+}
+
+/*# sourceMappingURL=styles.css.map */

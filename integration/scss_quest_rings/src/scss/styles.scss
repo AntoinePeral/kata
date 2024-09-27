@@ -1,0 +1,46 @@
+@use 'sass:color';
+h1 {
+  color: green;
+}
+
+@mixin createRing($size, $color){
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background-color: transparent;
+  border: calc($size/10) solid $color;
+  box-shadow: 0 calc($size/3) calc($size/3) $color;
+  
+}
+
+@for $i from 1 through 6 {
+  .ring-#{$i}{
+    @include createRing(20px * $i, lighten(#413402, $i*10% ) );
+    margin: -3px *$i;
+  }
+}
+
+.ring-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@mixin grid ($nbColumns, $gap){
+  display: grid;
+  grid-template-columns: repeat($nbColumns, 1fr);
+  grid-gap: $gap;
+}
+
+.grid-container{
+  @include grid(4,20px);
+  width: 100%
+}
+
+.grid-item {
+  background-color: #3498db;
+  padding: 15px;
+  color: white;
+  text-align: center;
+  font-size: large;
+}

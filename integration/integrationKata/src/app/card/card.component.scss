@@ -1,0 +1,130 @@
+.card_container{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  border: solid lightgrey 0.5px;
+  border-radius: 0.8rem;
+  overflow: hidden;
+  box-shadow: 1px 2px 10px lightgray;
+  transition: all ease 0.4s  ;
+  gap: 1em;
+}
+
+.card_container:hover{
+  transform: scale(1.05);
+  box-shadow: 3px 6px 15px rgba(112, 111, 111, 0.3);
+}
+
+.card_img{
+  max-height: 55%;
+}
+
+.card_img img {
+  width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+
+.card_info{
+  padding: 0.8em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  
+
+  h2{
+    font-size: 1rem;
+    font-weight:bolder;
+    margin: 4% 0%;
+  }
+
+  p{
+    font-size: 0.8rem;
+  }
+
+  button{
+    width: 100%;
+    height: 2rem;
+    background-color: hsla(275.11, 100%, 49.794%);
+    color: white;
+    border: none;
+    font-size: 0.6rem;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover{
+    background-color:hsla(273.84, 98.98%, 23.818%);
+  }
+
+  .button_block{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+}
+
+/* Media Queries */
+
+
+
+
+
+/* Pour les écrans jusqu'à 1024px (petits ordinateurs) */
+@media (max-width: 1025px) {
+  .card_container {
+    width: 80%; /* Garder la largeur pour les petits ordinateurs */
+    gap: 10px;
+  }
+
+  .card_info h2 {
+    font-size: 1rem; /* Taille normale du titre */
+  }
+
+  .card_info p {
+    font-size: 0.85rem; /* Légère augmentation de la taille du texte */
+  }
+
+  .card_info button {
+    font-size: 0.6rem; /* Taille normale du bouton */
+  }
+
+  /* Pour les écrans jusqu'à 768px (tablettes) */
+@media (min-width: 425px) and (max-width: 769px) {
+  .card_container {
+    width: 100%; /* Ajuste la largeur pour les tablettes */
+  }
+
+  .card_info h2 {
+    font-size: 0.95rem; /* Légère réduction de la taille du titre */
+  }
+
+  .card_info p {
+    font-size: 0.8rem; /* Garder la taille du texte inchangée */
+  }
+
+  .card_info button {
+    font-size: 0.55rem; /* Ajuste la taille du bouton */
+  }
+}
+
+/* Pour les écrans jusqu'à 425px (mobiles) */
+@media (max-width: 425px) {
+  .card_container {
+    width: 100%; /* Ajuste la largeur pour les petits écrans */
+  }
+
+  .card_info h2 {
+    font-size: 0.9rem; /* Réduit la taille du titre */
+  }
+
+  .card_info p {
+    font-size: 0.75rem; /* Réduit la taille du texte */
+  }
+
+  .card_info button {
+    font-size: 0.5rem; /* Réduit la taille du bouton */
+  }
+}
+}

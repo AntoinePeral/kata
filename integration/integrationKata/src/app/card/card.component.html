@@ -1,0 +1,17 @@
+
+    <div class="card_container">
+      <div class="card_img">
+        <img [src]="card.img" [alt]="card.title">
+      </div>
+      <div class="card_info">
+        <div class="text_block">
+          <h2>{{card.title}}</h2>
+          <p>{{card.description}}</p>
+        </div>
+
+        <div class="button_block">
+          <button (click)="displayInfos()">En savoir plus</button>
+        </div>
+      </div>
+    </div>
+

@@ -1,0 +1,19 @@
+
+<div class="card_container">
+  <div class="card_img">
+    <img [src]="card.img" [alt]="card.title">
+  </div>
+  <div class="card_info">
+    <h2>{{card.title}}</h2>
+    <p>Age : {{card.age}}</p>
+    <div class="citation_block">
+      <p>Citation : {{card.citation}} </p>
+      <input type="text" [(ngModel)]="card.citation">
+    </div>
+    <div class="button_block">
+      <button (click)="displayInfos()">En savoir plus</button>
+    </div>
+  </div>
+</div>
+
+

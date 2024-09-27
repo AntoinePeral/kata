@@ -1,0 +1,37 @@
+.container{
+   display: flex;
+    flex-wrap: wrap; /* Permet aux cartes de passer à la ligne suivante */
+    justify-content: center; /* Espace entre les cartes */
+    gap: 20px; /* Espace entre les cartes */
+    width: 80%;
+    margin: 2% auto;
+ }  
+
+.wrapper{
+  display: flex;
+  justify-content: center;
+  width: calc(100% - 72%);
+  height: 400px;
+}
+
+
+@media (max-width: 1025px) {
+  .wrapper{
+    height: 350px;
+    width: 45%;
+  }
+
+  @media (max-width: 769px) {
+    .wrapper{
+      height: 350px;
+      width: 45%;
+    }
+  }
+
+  @media (max-width: 429px) {
+    .wrapper{
+      height: 350px;
+      width: 90%;
+    }
+}
+}

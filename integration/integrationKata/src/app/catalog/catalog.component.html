@@ -1,0 +1,140 @@
+<!-- 
+<div class="catalog">
+  <div class="product-without-price">
+    <h2> Produit dont le prix doit être défini</h2>
+    <ul>
+      @for (product of getProductWithNoPrice(); track $index) {
+        <li class="product-name">name : {{product.name}}</li>
+        <ul>
+          <li>ID : {{product.id}} </li>
+          <li>price : {{product.price ? product.price : 'aucun prix défini'}}</li>
+          <li>discount : {{product.discount ? 'oui' : 'non'}}</li>
+        </ul>
+
+      }
+    </ul>
+  </div>
+  <div class="product-discount">
+    <h2> Produit en promotion</h2>
+    <ul>
+      @for (product of getProductWithDiscount(); track $index) {
+        <li class="product-name">name : {{product.name}}</li>
+        <ul>
+          <li>ID : {{product.id}} </li>
+          <li>price : {{product.price ? product.price : 'aucun prix défini'}}</li>
+          <li>discount : {{product.discount ? 'oui' : 'non'}}</li>
+        </ul>
+
+      }
+    </ul>
+  </div>
+  <div class="rest-of-product">
+    <h2> Tous les produits qui ne sont pas dans les autres listes</h2>
+    <ul>
+      @for (product of getRestOfProduct(); track $index) {
+        <li class="product-name">name : {{product.name}}</li>
+        <ul>
+          <li>ID : {{product.id}} </li>
+          <li>price : {{product.price ? product.price : 'aucun prix défini'}}</li>
+          <li>discount : {{product.discount ? 'oui' : 'non'}}</li>
+        </ul>
+
+      }
+    </ul>
+  </div>
+</div>   -->
+
+
+
+
+<!-- <div class="catalog">
+  <div class="product-without-price">
+    <h2> Produit dont le prix doit être défini</h2>
+    <ul *ngFor="let product of getProductWithNoPrice()">
+    
+        <li class="product-name">name : {{product.name}}</li>
+        <ul>
+          <li>ID : {{product.id}} </li>
+          <li>price : {{product.price ? product.price : 'aucun prix défini'}}</li>
+          <li>discount : {{product.discount ? 'oui' : 'non'}}</li>
+        </ul>
+
+
+    </ul>
+  </div>
+  <div class="product-discount">
+    <h2> Produit en promotion</h2>
+    <ul *ngFor="let product of getProductWithDiscount()">
+     
+        <li class="product-name">name : {{product.name}}</li>
+        <ul>
+          <li>ID : {{product.id}} </li>
+          <li>price : {{product.price ? product.price : 'aucun prix défini'}}</li>
+          <li>discount : {{product.discount ? 'oui' : 'non'}}</li>
+        </ul>
+
+    
+    </ul>
+  </div>
+  <div class="rest-of-product">
+    <h2> Tous les produits qui ne sont pas dans les autres listes</h2>
+    <ul *ngFor="let product of getRestOfProduct()">   <li class="product-name">name : {{product.name}}</li>
+        <ul>
+          <li>ID : {{product.id}} </li>
+          <li>price : {{product.price ? product.price : 'aucun prix défini'}}</li>
+          <li>discount : {{product.discount ? 'oui' : 'non'}}</li>
+        </ul>
+    </ul>
+  </div>
+</div>   -->
+
+
+<div class="catalog">
+  <div class="product-without-price">
+    <h2> Produit dont le prix doit être défini</h2>
+    <ul>
+      @for (product of productList; track product.id) {
+        @if (!product.price) {
+          <li class="product-name">name : {{product.name}}</li>
+          <ul>
+            <li>ID : {{product.id}} </li>
+            <li>price : {{product.price ? product.price : 'aucun prix défini'}}</li>
+            <li>discount : {{product.discount ? 'oui' : 'non'}}</li>
+          </ul>
+        }
+      }
+    </ul>
+  </div>
+  <div class="product-discount">
+    <h2> Produit en promotion</h2>
+    <ul>
+      @for (product of productList; track product.id) {
+        @if (product.discount) {
+          <li class="product-name">name : {{product.name}}</li>
+          <ul>
+            <li>ID : {{product.id}} </li>
+            <li>price : {{product.price ? product.price : 'aucun prix défini'}}</li>
+            <li>discount : {{product.discount ? 'oui' : 'non'}}</li>
+          </ul>
+        }
+      }
+    </ul>
+  </div>
+  <div class="rest-of-product">
+    <h2> Tous les produits qui ne sont pas dans les autres listes</h2>
+    <ul>
+      @for (product of productList; track product.id) {
+        @if (!product.discount && product.price) {
+          <li class="product-name">name : {{product.name}}</li>
+          <ul>
+            <li>ID : {{product.id}} </li>
+            <li>price : {{product.price ? product.price : 'aucun prix défini'}}</li>
+            <li>discount : {{product.discount ? 'oui' : 'non'}}</li>
+          </ul>
+
+        }
+      }
+    </ul>
+  </div>
+</div>  
+

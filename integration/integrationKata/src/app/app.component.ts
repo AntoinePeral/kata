@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CardComponent } from "./card/card.component";
 import { CardAtelierComponent } from './card-atelier/card-atelier.component';
+import { CatalogComponent } from './catalog/catalog.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, CardComponent, CardAtelierComponent],
+  imports: [RouterOutlet, CatalogComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

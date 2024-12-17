@@ -1,0 +1,20 @@
+<p>pick-reviewer works!</p>
+
+@if(alreadyChosen.length !== students.length){
+  <button (click)="pickReviewer()"> perosnne aléatoire</button>
+}
+
+<p>la personne choisi est  {{pickViewer}}</p>
+<ul>liste des personnes deja choisi  : 
+  @if(alreadyChosen.length <= students.length){
+    @for(viewer of alreadyChosen; track $index) {
+      <li> {{viewer}}</li>
+    } 
+  }
+  
+  @if(alreadyChosen.length === students.length){
+    <p>toutes les personnes ont parlé</p>
+    <button (click)="initChosenArray()">rénitialiser le tableau </button>
+  }
+  
+</ul>

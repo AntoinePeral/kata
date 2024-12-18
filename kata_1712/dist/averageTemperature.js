@@ -1,4 +1,5 @@
-var temperatureData = [
+"use strict";
+const temperatureData = [
     { "city": "Paris", "year": 2020, "avgTemperature": 17.7 },
     { "city": "Paris", "year": 2021, "avgTemperature": 18.1 },
     { "city": "Paris", "year": 2022, "avgTemperature": 16.6 },
@@ -18,10 +19,9 @@ var temperatureData = [
 console.log("Ma solution");
 // Fonction pour regrouper les données par ville
 function groupByCity(data) {
-    var groupedData = {};
+    const groupedData = {};
     // On parcourt chaque donnée de température
-    data.forEach(function (_a) {
-        var city = _a.city, avgTemperature = _a.avgTemperature;
+    data.forEach(({ city, avgTemperature }) => {
         if (!groupedData[city]) {
             // Si la ville n'existe pas encore, on initialise un tableau pour cette ville
             groupedData[city] = [];
@@ -33,13 +33,13 @@ function groupByCity(data) {
     return groupedData;
 }
 function getCityWithHighestAverage(data) {
-    var groupedData = groupByCity(data);
-    var maxAverageTemp = -Infinity;
-    var cityWithMaxAverage = '';
+    const groupedData = groupByCity(data);
+    let maxAverageTemp = -Infinity;
+    let cityWithMaxAverage = '';
     // Calcul de la moyenne des températures pour chaque ville
-    for (var city in groupedData) {
-        var temperatures = groupedData[city];
-        var averageTemp = temperatures.reduce(function (sum, temp) { return sum + temp; }, 0) / temperatures.length;
+    for (const city in groupedData) {
+        const temperatures = groupedData[city];
+        const averageTemp = temperatures.reduce((sum, temp) => sum + temp, 0) / temperatures.length;
         // Comparaison avec la température moyenne maximale trouvée jusqu'ici
         if (averageTemp > maxAverageTemp) {
             maxAverageTemp = averageTemp;
@@ -49,8 +49,8 @@ function getCityWithHighestAverage(data) {
     // Retourner la ville avec la moyenne la plus élevée
     return cityWithMaxAverage;
 }
-var cityWithHighestAverage = getCityWithHighestAverage(temperatureData);
-console.log("La ville avec la temp\u00E9rature moyenne la plus \u00E9lev\u00E9e est : ".concat(cityWithHighestAverage));
+const cityWithHighestAverage = getCityWithHighestAverage(temperatureData);
+console.log(`La ville avec la température moyenne la plus élevée est : ${cityWithHighestAverage}`);
 // Regroupement des données
 // const groupedData = groupByCity(temperatureData);
 // // Fonction pour calculer la température moyenne pour chaque ville
@@ -134,7 +134,7 @@ console.log("La ville avec la temp\u00E9rature moyenne la plus \u00E9lev\u00E9e 
 // Matthieu
 console.log("solution de Matthieu");
 function getMaxAverageTemp(inputs) {
-    var cityTemps = inputs.reduce(function (acc, input) {
+    const cityTemps = inputs.reduce((acc, input) => {
         if (!acc[input.city]) {
             acc[input.city] = [];
         }
@@ -144,16 +144,11 @@ function getMaxAverageTemp(inputs) {
         console.log("Step 1 - Rassembler les températures pour une même ville", acc);
         return acc;
     }, {});
-    var cityAvgTemps = Object.entries(cityTemps).map(function (_a) {
-        var city = _a[0], temps = _a[1];
-        return ({
-            city: city,
-            avgTemp: temps.reduce(function (sum, temp) { return sum + temp; }, 0) / temps.length,
-        });
-    });
-    var maxCity = cityAvgTemps.reduce(function (max, cityData) {
-        return cityData.avgTemp > max.avgTemp ? cityData : max;
-    });
+    const cityAvgTemps = Object.entries(cityTemps).map(([city, temps]) => ({
+        city,
+        avgTemp: temps.reduce((sum, temp) => sum + temp, 0) / temps.length,
+    }));
+    const maxCity = cityAvgTemps.reduce((max, cityData) => cityData.avgTemp > max.avgTemp ? cityData : max);
     return maxCity.city;
 }
 console.log(getMaxAverageTemp(temperatureData));

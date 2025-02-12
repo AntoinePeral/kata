@@ -1,12 +1,14 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.filterAndSortProducts = filterAndSortProducts;
 const categories = [
     { id: 1, name: 'Electronique' },
     { id: 2, name: 'Accessoires' }
 ];
 const products = [
     { name: 'ABC', idCategory: 2, price: 30 },
-    { name: 'AAA', idCategory: 2, price: 30 },
     { name: 'aaa', idCategory: 2, price: 30 },
+    { name: 'AAA', idCategory: 2, price: 30 },
     { name: 'Télévision', idCategory: 1, price: 400 },
     { name: 'Laptop', idCategory: 1, price: 900 },
     { name: 'Souris', idCategory: 2, price: 20 },
@@ -18,9 +20,13 @@ function filterAndSortProducts(categoryId, productsArray) {
     return productsArray
         .filter((product) => product.idCategory === categoryId)
         .sort((a, b) => {
-        return a.price === b.price
-            ? a.name.localeCompare(b.name)
-            : a.price - b.price;
+        // D'abord on compare les prix
+        if (a.price === b.price) {
+            // Si les prix sont égaux, on compare par nom, de manière insensible à la casse
+            return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+        }
+        // Sinon, on compare par prix
+        return a.price - b.price;
     });
 }
 console.log(filterAndSortProducts(1, products));

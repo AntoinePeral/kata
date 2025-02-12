@@ -1,4 +1,4 @@
-interface Product{
+export interface Product{
     name: string,
     idCategory: number,
     price: number
@@ -26,14 +26,18 @@ const products: Product[] = [
     { name: 'Câble HDMI', idCategory: 2, price: 10 }
 ];
 
-function filterAndSortProducts(categoryId: number, productsArray: Product[]) : Product[]{
+export function filterAndSortProducts(categoryId: number, productsArray: Product[]) : Product[]{
     return productsArray
         .filter((product) => product.idCategory === categoryId)
-        .sort((a, b) =>{
-           return  a.price === b.price 
-            ? a.name.localeCompare(b.name, undefined, { sensitivity: "base" }) 
-            : a.price - b.price
-        })
+        .sort((a, b) => {
+            // D'abord on compare les prix
+            if (a.price === b.price) {
+                // Si les prix sont égaux, on compare par nom, de manière insensible à la casse
+                return a.name.localeCompare(b.name, undefined, { sensitivity: 'base' });
+            }
+            // Sinon, on compare par prix
+            return a.price - b.price;
+        });
 }
 
 console.log(filterAndSortProducts(1, products));

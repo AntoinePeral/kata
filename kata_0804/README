@@ -1,0 +1,264 @@
+✅ Initialisation simple d'un projet TypeScript
+Créer un dossier de projet :
+
+bash
+Copier
+Modifier
+mkdir mon-projet-typescript
+cd mon-projet-typescript
+Initialiser un projet Node.js :
+
+bash
+Copier
+Modifier
+npm init -y
+Installer TypeScript :
+
+bash
+Copier
+Modifier
+npm install typescript --save-dev
+Créer un fichier de configuration TypeScript (tsconfig.json) :
+
+bash
+Copier
+Modifier
+npx tsc --init
+Cela va générer un fichier tsconfig.json avec plein d’options commentées. Tu peux déjà l’utiliser tel quel, ou l’ajuster selon tes besoins.
+
+Créer un dossier src et un fichier index.ts :
+
+bash
+Copier
+Modifier
+mkdir src
+echo "console.log('Hello TypeScript');" > src/index.ts
+Compiler le projet :
+
+bash
+Copier
+Modifier
+npx tsc
+Par défaut, le code compilé sera dans un dossier dist ou à côté des fichiers .ts, selon les options de ton tsconfig.json.
+
+🔧 Quelques options utiles dans tsconfig.json
+Tu peux modifier ton tsconfig.json comme ceci pour un setup courant :
+
+json
+Copier
+Modifier
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true
+  }
+}
+
+🚀 Bonus : setup avec ts-node pour ne pas compiler à chaque fois
+Installe ts-node et ts-node-dev :
+
+bash
+Copier
+Modifier
+npm install ts-node ts-node-dev --save-dev
+Ajoute un script dans ton package.json :
+
+json
+Copier
+Modifier
+"scripts": {
+  "start": "ts-node src/index.ts",
+  "dev": "ts-node-dev --respawn src/index.ts"
+}
+
+
+----------------------------------------
+✅ Initialisation rapide d’un projet TypeScript (avec TypeScript global)
+bash
+Copier
+Modifier
+# 1. Créer le dossier du projet
+mkdir mon-projet
+cd mon-projet
+
+# 2. Initialiser le projet Node.js
+npm init -y
+
+# 3. Générer le fichier de config TypeScript
+tsc --init
+
+# 4. Créer l’arborescence
+mkdir src
+echo "console.log('Hello TypeScript');" > src/index.ts
+
+# 5. Modifier tsconfig.json (optionnel mais conseillé)
+Voici un tsconfig.json simple et propre :
+
+json
+Copier
+Modifier
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "include": ["src"]
+}
+🧪 Pour compiler :
+bash
+Copier
+Modifier
+tsc
+Tu auras les fichiers .js générés dans dist/.
+
+🚀 Pour exécuter :
+bash
+Copier
+Modifier
+node dist/index.js
+
+------------------------------------
+
+### ✅ 1. Installer Jest pour TypeScript
+Dans ton terminal, à la racine du projet :
+
+bash
+Copier
+Modifier
+npm install --save-dev jest ts-jest @types/jest
+✅ 2. Initialiser Jest avec support TypeScript
+bash
+Copier
+Modifier
+npx ts-jest config:init
+Cela crée un fichier jest.config.js avec les bons presets TypeScript.
+
+✅ 3. Configurer ton tsconfig.json (si besoin)
+Assure-toi d’avoir un fichier tsconfig.json propre pour Jest, sinon Jest peut galérer à comprendre les modules. Tu peux ajouter un tsconfig.jest.json si tu veux séparer la config des tests.
+
+Exemple minimal dans tsconfig.json :
+
+json
+Copier
+Modifier
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "commonjs",
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
+    "esModuleInterop": true,
+    "types": ["jest"]
+  },
+  "include": ["src"]
+}
+✅ 4. Réorganise ton code dans /src
+Tu peux faire ça :
+
+cpp
+Copier
+Modifier
+/src
+  ├─ product.ts       // interface Product
+  ├─ inventory.ts     // tes fonctions (addProduct, removeProduct, etc.)
+  ├─ inventory.test.ts // tes tests Jest ici
+✅ 5. Créer les fichiers nécessaires
+product.ts
+ts
+Copier
+Modifier
+export interface Product {
+  name: string;
+  price: number;
+  quantity: number;
+}
+inventory.ts
+Colle toutes tes fonctions ici et n'oublie pas d’exporter :
+
+ts
+Copier
+Modifier
+import { Product } from "./product";
+
+export function addProduct(...) { ... }
+export function removeProduct(...) { ... }
+// etc.
+✅ 6. Créer un fichier de test : inventory.test.ts
+ts
+Copier
+Modifier
+import { Product } from "./product";
+import { addProduct, removeProduct, updateQuantity, getTotalValue } from "./inventory";
+
+describe("Gestion de stock", () => {
+  let products: Product[];
+
+  beforeEach(() => {
+    products = [
+      { name: "Laptop", price: 1200, quantity: 5 },
+      { name: "Mouse", price: 20, quantity: 50 },
+      { name: "Keyboard", price: 50, quantity: 30 },
+    ];
+  });
+
+  test("ajoute un nouveau produit", () => {
+    const updated = addProduct(products, { name: "Car", price: 1000, quantity: 2 });
+    expect(updated.find(p => p.name === "Car")).toBeDefined();
+  });
+
+  test("ajoute la quantité si le produit existe déjà", () => {
+    const updated = addProduct(products, { name: "Mouse", price: 20, quantity: 10 });
+    const mouse = updated.find(p => p.name === "Mouse");
+    expect(mouse?.quantity).toBe(60);
+  });
+
+  test("supprime un produit existant", () => {
+    const updated = removeProduct(products, "Mouse");
+    expect(updated.find(p => p.name === "Mouse")).toBeUndefined();
+  });
+
+  test("ne fait rien si produit à supprimer non trouvé", () => {
+    const updated = removeProduct(products, "Phone");
+    expect(updated.length).toBe(3);
+  });
+
+  test("met à jour la quantité d’un produit", () => {
+    const updated = updateQuantity(products, "Keyboard", 100);
+    const keyboard = updated.find(p => p.name === "Keyboard");
+    expect(keyboard?.quantity).toBe(100);
+  });
+
+  test("retourne la valeur totale du stock", () => {
+    const value = getTotalValue(products);
+    expect(value).toBe(1200*5 + 20*50 + 50*30); // 6000 + 1000 + 1500 = 8500
+  });
+});
+✅ 7. Lancer les tests
+bash
+Copier
+Modifier
+npx jest
+Ou ajoute un script dans package.json :
+
+json
+Copier
+Modifier
+"scripts": {
+  "test": "jest"
+}
+Et ensuite :
+
+bash
+Copier
+Modifier
+npm test
+

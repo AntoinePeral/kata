@@ -1,0 +1,207 @@
+🚀 Étapes pour lancer les tests Jest + TypeScript
+1. Initialiser ton projet
+Si ce n’est pas déjà fait :
+
+
+npm init -y
+2. Installer les dépendances nécessaires
+
+npm install --save-dev jest ts-jest typescript @types/jest
+jest → le framework de test.
+
+ts-jest → pour que Jest comprenne TypeScript.
+
+@types/jest → pour l’autocomplétion et les types.
+
+typescript → bah, évidemment 😄.
+
+3. Configurer TypeScript
+Crée un fichier tsconfig.json si t’en as pas encore :
+
+tsc --init
+
+json
+Copier
+Modifier
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist"
+  },
+  "include": ["src", "tests"] --> ne mettre les test seulement si on veut les utiliser pour le outDir
+}
+
+4. Configurer Jest avec TypeScript
+Lance :
+
+
+npx ts-jest config:init
+Ça va créer un fichier jest.config.js avec une config de base comme :
+
+js
+Copier
+Modifier
+/** @type {import('ts-jest').JestConfigWithTsJest} */
+module.exports = {
+  preset: 'ts-jest',
+  testEnvironment: 'node',
+  testMatch: ['**/?(*.)+(spec|test).[tj]s?(x)'],
+};
+5. Créer tes fichiers
+src/sum.ts
+
+ts
+Copier
+Modifier
+export function sum(a: number, b: number): number {
+  return a + b;
+}
+tests/sum.test.ts
+
+ts
+Copier
+Modifier
+import { sum } from '../src/sum';
+
+test('adds 1 + 2 to equal 3', () => {
+  expect(sum(1, 2)).toBe(3);
+});
+6. Lancer les tests
+Dans ton terminal (dans VSCode) :
+
+
+npx jest
+ou
+
+
+npm test
+(si t’as un script "test": "jest" dans ton package.json)
+
+7. Activer l’extension Jest (optionnel mais stylé)
+Installe l’extension VSCode "Jest" (de Orta) pour :
+
+Voir les résultats des tests en direct dans l’éditeur.
+
+Lancer les tests en un clic.
+
+---------------------
+
+
+👉 Si tu installes un outil en dev avec npm,
+tu peux le lancer sans problème via npx ou via un script.
+
+🔧 Exemple avec jest :
+
+npm install --save-dev jest
+Ça l’installe dans :
+
+
+./node_modules/jest
+Et crée aussi un lien exécutable dans :
+
+
+./node_modules/.bin/jest
+✅ 2 façons de le lancer :
+✅ Option 1 — avec npx :
+
+npx jest
+➡️ npx va chercher jest dans node_modules/.bin et le lance pour toi.
+
+✅ Option 2 — via un script npm :
+Dans ton package.json :
+
+json
+Copier
+Modifier
+"scripts": {
+  "test": "jest"
+}
+Et ensuite :
+
+
+npm test
+🚫 Tu n’as pas besoin de l’installer globalement (npm install -g jest)
+car Jest est dispo localement dans ton projet, et npx le trouve direct. 💪
+
+✅ En résumé :
+Commande	Ce qu’elle fait
+npm install --save-dev	Installe le paquet en local (dev)
+npx jest	Lance jest sans l’installer globalement
+npm test	Lance le script "test" du package.json
+
+
+--------------
+
+
+🧾 Qu’est-ce que tsc ?
+tsc = TypeScript Compiler
+
+C’est l’outil qui prend tes fichiers .ts (TypeScript) et les compile en fichiers .js (JavaScript), que Node.js ou un navigateur peuvent exécuter.
+
+🧪 Et npx tsc, c’est quoi ?
+npx est un outil livré avec npm, qui permet d’exécuter des binaires locaux du projet (ou temporaires s’ils ne sont pas installés).
+
+tsc est le binaire de compilation TypeScript.
+
+Donc :
+
+bash
+Copier
+Modifier
+npx tsc
+▶️ lance le compilateur TypeScript même si tu n’as pas installé TypeScript globalement.
+
+🧱 Que fait npx tsc exactement ?
+Il va :
+
+Lire ton fichier tsconfig.json
+
+Trouver tous les fichiers .ts dans les dossiers définis par "include" (ex: "include": ["src"])
+
+Appliquer les options (rootDir, outDir, target, etc.)
+
+Compiler les fichiers .ts ➜ .js
+
+Placer les fichiers .js dans le dossier défini par "outDir" (ex: src/dist/)
+
+🔁 Exemple pratique
+Dossier src/findIntruder.ts :
+ts
+Copier
+Modifier
+export default function findIntruder(numbers: number[]) {
+  const even = numbers.filter(n => n % 2 === 0);
+  const odd = numbers.filter(n => n % 2 !== 0);
+  if (even.length === 1) return even[0];
+  if (odd.length === 1) return odd[0];
+  throw new Error('Aucun intrus trouvé');
+}
+Dans tsconfig.json :
+json
+Copier
+Modifier
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "src/dist"
+  },
+  "include": ["src"]
+}
+Commande :
+bash
+Copier
+Modifier
+npx tsc
+Résultat :
+css
+Copier
+Modifier
+src/
+├── findIntruder.ts
+├── dist/
+│   └── findIntruder.js ✅
